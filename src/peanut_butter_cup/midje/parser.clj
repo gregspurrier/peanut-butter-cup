@@ -9,6 +9,12 @@ java.io.PushbackReader"
   (when-let [form (read rdr false nil)]
     (cons form (lazy-seq (form-seq rdr)))))
 
+(defn- ^:testable about-string?
+  "Returns true if the s is a string of the form \"about ...\""
+  [s]
+  (and (string? s)
+       (boolean (re-matches #"^about\s+.+" s))))
+
 (defn- parse-prereq-clauses
   [ps]
   (match [ps]
@@ -30,4 +36,8 @@ java.io.PushbackReader"
 contains :lhs and :rhs keys whose values are the left-hand side and right-hand
 side of the fact, respectively."
   [fact]
-  (parse-fact-clauses (rest fact)))
+  (match [fact]
+         [([(:or 'fact 'facts) (s :when about-string?) & clauses] :seq)]
+         {:doc s :clauses (parse-fact-clauses clauses)}
+         [([(:or 'fact 'facts) & clauses] :seq)]
+         {:clauses (parse-fact-clauses clauses)}))

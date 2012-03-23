@@ -12,17 +12,21 @@
   (form-seq (PushbackReader. (StringReader. "(a b c)(d e f)")))
   => '((a b c) (d e f)))
 
+(facts "about about-string?"
+  (about-string? "about foo")
+  => true)
+
 (comment
   ;; Pending resolution of https://github.com/marick/Midje/issues/117
   (facts "about parse-fact-form"
     (parse-fact-form '(fact ..lhs.. => ..rhs..))
-    => [{:lhs ..lhs.. :rhs ..rhs..}]
+    => {:clauses [{:lhs ..lhs.. :rhs ..rhs..}]}
     (parse-fact-form '(fact ..lhs1.. => ..rhs1.. ..lhs2.. => ..rhs2..))
-    => [{:lhs ..lhs1.. :rhs ..rhs1..}
-        {:lhs ..lhs2.. :rhs ..rhs2..}]
+    => {:clauses [{:lhs ..lhs1.. :rhs ..rhs1..}
+                   {:lhs ..lhs2.. :rhs ..rhs2..}]}
     (parse-fact-form '(fact ..lhs.. => ..rhs..
                         (provided ..p-lhs.. => ..p-rhs..)))
-    => [{:lhs ..lhs1.. :rhs ..rhs1.. :prereqs [{:lhs ..p-lhs..
-                                                :rhs ..p-rhs..}]}
-        {:lhs ..lhs2.. :rhs ..rhs2..}])
+    => {:clauses [{:lhs ..lhs1.. :rhs ..rhs1.. :prereqs [{:lhs ..p-lhs..
+                                                          :rhs ..p-rhs..}]}
+                  {:lhs ..lhs2.. :rhs ..rhs2..}]})
   )
