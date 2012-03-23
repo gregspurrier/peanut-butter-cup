@@ -5,8 +5,8 @@
 
 (defn- ^:testable form-seq
   "Returns the forms read from rdr as a lazy sequence. rdr must implement
-java.io.PushbackReader"
-  [^java.io.PushbackReader rdr]
+java.io.BufferedReader"
+  [^java.io.BufferedReader rdr]
   (when-let [form (read rdr false nil)]
     (cons form (lazy-seq (form-seq rdr)))))
 
@@ -89,3 +89,8 @@ side of the fact, respectively."
          {:about (fn-name-from-about s) :clauses (parse-fact-clauses clauses)}
          [([(:or 'fact 'facts) & clauses] :seq)]
          {:clauses (parse-fact-clauses clauses)}))
+
+(defn parse
+  "Reads and parses Midje fact forms from rdr. Non-fact forms are ignored."
+  [rdr]
+  (keep parse-fact-form (form-seq (java.io.PushbackReader. rdr))))

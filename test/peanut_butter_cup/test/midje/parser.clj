@@ -64,3 +64,10 @@
                                                           :rhs ..p-rhs..}]}
                   {:lhs ..lhs2.. :rhs ..rhs2..}]})
   )
+
+(facts "about parse"
+  (parse (StringReader. "(fact \"about foo\" (foo 37) => 42)"))
+  => [{:about 'foo :clauses [{:lhs '(foo 37) :rhs 42}]}]
+  "non-fact forms are ignored"
+  (parse (StringReader. "(ns monkey)(fact \"about foo\" (foo 37) => 42)(bar)"))
+  => [{:about 'foo :clauses [{:lhs '(foo 37) :rhs 42}]}])
