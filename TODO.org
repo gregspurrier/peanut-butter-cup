@@ -3,6 +3,8 @@
 Fact expectations support other arrow forms:
 - [[https://github.com/marick/Midje/wiki/Negating-arrows][Negating Arrows]] -- =not=> / =deny=>
 - [[https://github.com/marick/Midje/wiki/Macros][Macro Expansion]] -- =expands-to=>
+** Tabular facts
+See [[https://github.com/marick/Midje/wiki/Tabular-facts][Tabular facts]].
 ** Streaming prerequisites
 See [[https://github.com/marick/Midje/wiki/Streaming-prerequisites][Streaming prerequisites]]
 ** Call counts in prerequisites
