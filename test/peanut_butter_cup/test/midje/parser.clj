@@ -46,24 +46,28 @@
   (combine-fact-clauses [{:doc ..d..} {:lhs ..l1..} {:lhs ..l2..} {:prereqs ..p..}])
   => '({:doc ..d.. :lhs ..l1..} {:lhs ..l2.. :prereqs ..p..}))
 
-(comment
-  ;; Pending resolution of https://github.com/marick/Midje/issues/117
-  (facts "about parse-fact-form"
-    (parse-fact-form '(fact ..lhs.. => ..rhs..))
-    => {:clauses [{:lhs ..lhs.. :rhs ..rhs..}]}
-    (parse-fact-form '(fact "about some-fn" ..lhs.. => ..rhs..))
-    => {:about 'some-fn :clauses [{:lhs ..lhs.. :rhs ..rhs..}]}
-    (parse-fact-form '(fact ..lhs1.. => ..rhs1..
-                        "one more thing"
-                        ..lhs2.. => ..rhs2..))
-    => {:clauses [{:lhs ..lhs1.. :rhs ..rhs1..}
-                   {:doc "one more thing" :lhs ..lhs2.. :rhs ..rhs2..}]}
-    (parse-fact-form '(fact ..lhs.. => ..rhs..
-                        (provided ..p-lhs.. => ..p-rhs..)))
-    => {:clauses [{:lhs ..lhs1.. :rhs ..rhs1.. :prereqs [{:lhs ..p-lhs..
-                                                          :rhs ..p-rhs..}]}
-                  {:lhs ..lhs2.. :rhs ..rhs2..}]})
-  )
+(facts "about parse-fact-form"
+  (parse-fact-form '(fact ..lhs.. => ..rhs..))
+  => {:clauses [{:lhs ..lhs.. :rhs ..rhs..}]}
+  (parse-fact-form '(fact "about some-fn" ..lhs.. => ..rhs..))
+  => {:about 'some-fn :clauses [{:lhs ..lhs.. :rhs ..rhs..}]}
+  (parse-fact-form '(fact ..lhs.. => ..rhs..
+                      (provided ..p-lhs.. => ..p-rhs..)))
+  => {:clauses [{:lhs ..lhs.. :rhs ..rhs..
+                 :prereqs [{:lhs ..p-lhs.. :rhs ..p-rhs..}]}]}
+  (parse-fact-form '(fact ..lhs1.. => ..rhs1..
+                      "one more thing"
+                      ..lhs2.. => ..rhs2..))
+  => {:clauses [{:lhs ..lhs1.. :rhs ..rhs1..}
+                {:doc "one more thing" :lhs ..lhs2.. :rhs ..rhs2..}]}
+  (parse-fact-form '(fact ..lhs1.. => ..rhs1..
+                      (provided ..p-lhs.. => ..p-rhs..)
+                      "no provided for the next one"
+                      ..lhs2.. => ..rhs2..))
+  => {:clauses [{:lhs ..lhs1.. :rhs ..rhs1..
+                 :prereqs [{:lhs ..p-lhs.. :rhs ..p-rhs..}]}
+                {:doc "no provided for the next one"
+                 :lhs ..lhs2.. :rhs ..rhs2..}]})
 
 (facts "about parse"
   (parse (StringReader. "(fact \"about foo\" (foo 37) => 42)"))
