@@ -1,0 +1,107 @@
+<html>
+  <head>
+    <title>your.namespace.here</title>
+    <link href='http://fonts.googleapis.com/css?family=Inconsolata|Merriweather' rel='stylesheet' type='text/css'>
+    <style type="text/css">
+
+body {
+  font-family: Merriweather;
+  font-size: 1em;
+  max-width: 800px;
+}
+
+p {
+  line-height: 1.625;
+  margin-top: 1.625em;
+  margin-bottom: 1.625em;
+}
+
+#namespace {
+  font-family: Inconsolata, monospace;
+}
+
+.var h2 {
+  font-family: Inconsolata, monospace;
+}
+
+.usages {
+  margin: 1.625em 0 1.625em 0;
+}
+
+.usages ul, .examples ul {
+  list-style: none;
+  padding: 0;
+}
+.usages li, .examples ul {
+  font-family: Inconsolata, monospace;
+  margin: 0;
+}
+.usage {
+  line-height: 1;
+  margin: 0;
+}
+
+.examples ul {
+  margin: 1.625em 0 1.625em 0;
+  padding: 1.625em;
+  color: #657b83;
+  background-color: #fdf6e3;
+}
+
+.example .subj, .example .pred {
+  line-height: 1;
+  margin: 0;
+}
+
+.example .pred {
+  font-style: italic;
+}
+
+.example + .example {
+  margin-top: 1em;
+}
+
+    </style>
+  </head>
+  <body>
+    <h1 id="namespace">your.namespace.here</h1>
+    <div id="namespace-doc">
+      <p>
+        This is the doc string of the namespace. It would be great if there
+        was an overview of functionality provided by the public functions
+        that it contains.
+    </div>
+    <div id="publics">
+      <div class="var">
+        <h2>my-fn</h2>
+        <div class="usages">
+          <ul>
+            <li><p class="usage">(my-fn x)</p></li>
+            <li><p class="usage">(my-fn x y & more)</p></li>
+          </ul>
+        </div>
+        <div class="doc-string">
+          This is a fine, fine function. I wrote it myself.
+        </div>
+        <div class="examples">
+          <ul>
+            <li class="example">
+              <p class="subj"><span class="lhs">(my-fn "hello")</span></p>
+              <p class="pred">
+                <span class="arrow">=></span>
+                <span class="rhs">"world!"</span>
+              </p>
+            </li>
+            <li class="example">
+              <p class="subj"><span class="lhs">(my-fn "goodbye")</span></p>
+              <p class="pred">
+                <span class="arrow">=></span>
+                <span class="rhs">"don't go!"</span>
+              </p>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
