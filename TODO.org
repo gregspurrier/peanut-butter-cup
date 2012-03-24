@@ -1,0 +1,18 @@
+* Fact parsing
+** Support alternative arrow forms
+Fact expectations support other arrow forms:
+- [[https://github.com/marick/Midje/wiki/Negating-arrows][Negating Arrows]] -- =not=> / =deny=>
+- [[https://github.com/marick/Midje/wiki/Macros][Macro Expansion]] -- =expands-to=>
+** Streaming prerequisites
+See [[https://github.com/marick/Midje/wiki/Streaming-prerequisites][Streaming prerequisites]]
+** Call counts in prerequisites
+See [[https://github.com/marick/Midje/wiki/Specifying-call-counts][Specifying call counts]].
+It's not clear that these are necessary from a documentation perspective:
+they are perhaps better considered to be an implementation detail.
+But, we should at least ensure that they are safely ignored by the parser.
+* HTML generation
+** Detail pages for each namespace
+** Index page
+* Command-line tool
+** Tree walk of src directory
+* Leiningen Plugin
