@@ -6,5 +6,8 @@ Peanut Butter Cup will produce HTML documentation for projects combining the doc
 ## Status
 At this point `peanut-butter-cup.core/get-fn-metadata-and-facts` can take a namespace and return a seq of metadata extracted from the public vars in that namespace, updated with the corresponding facts from Midje. Generating HTML output is still to be done.
 
+## Acknowledgements
+A big thank you goes to Alex Baranosky (@Baranosky) for adding a hook to Midje enabling Peanut Butter Cup--or any other tool--to tap into the parsed representation of facts.
+
 ## License
 Copyright (c) 2012 Greg Spurrier. Distributed under the MIT license. See LICENSE.txt for details.

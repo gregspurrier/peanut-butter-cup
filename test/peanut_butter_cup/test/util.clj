@@ -5,3 +5,15 @@
 (fact "about name-to-test-path"
   (name-to-test-path 'peanut-butter-cup.util)
   => "test/peanut_butter_cup/test/util.clj")
+
+(fact "about name-to-test-name"
+  (name-to-test-name 'peanut-butter-cup.util)
+  => 'peanut-butter-cup.test.util)
+
+(facts "about form-to-str"
+  (form-to-str "a")
+  => "\"a\""
+  (form-to-str 9)
+  => "9"
+  (form-to-str '(a list))
+  => "(a list)")
