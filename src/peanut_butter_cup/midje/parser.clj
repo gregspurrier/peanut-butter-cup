@@ -1,4 +1,5 @@
 (ns peanut-butter-cup.midje.parser
+  "Parser to extract examples from Midje facts."
   (:use [clojure.core.match :only (match)]
         [clojure.pprint :only (pprint)])
   (:require [clojure.string :as str]))
