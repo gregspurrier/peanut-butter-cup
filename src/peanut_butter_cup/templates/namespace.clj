@@ -1,6 +1,7 @@
 (ns peanut-butter-cup.templates.namespace
   "Template for the documentation page for a namespace"
-  (:require [net.cgrand.enlive-html :as html]))
+  (:require [net.cgrand.enlive-html :as html])
+  (:import [com.petebevin.markdown MarkdownProcessor]))
 
 (def ^:private namespace-html
   (html/html-resource "peanut_butter_cup/templates/namespace.html"))
@@ -18,7 +19,7 @@
 
 (defn- format-doc-string
   [s]
-  s)
+  (.markdown (MarkdownProcessor.) s))
 
 (html/defsnippet usage-item namespace-html
   [:#publics [:.var html/first-of-type] :.usages [:li html/first-of-type]]
@@ -49,7 +50,7 @@
   [:.usages] (if (seq (:arglists fn-meta))
                (html/content (usages fn-meta)))
   [:.doc-string] (if-let [ds (:doc fn-meta)]
-                  (html/content (format-doc-string ds)))
+                  (html/html-content (format-doc-string ds)))
   [:.examples] (if-let [facts (seq (:facts fn-meta))]
                  (html/content (examples facts))))
 
@@ -57,5 +58,5 @@
   [ns fn-metas]
   [:#namespace] (html/content (name ns))
   [:#namespace-doc] (if-let [d (namespace-doc ns)]
-                      (html/content (format-doc-string d)))
+                      (html/html-content (format-doc-string d)))
   [:#publics] (html/content (map var-item fn-metas)))
