@@ -1,7 +1,7 @@
 (ns peanut-butter-cup.midje.parser
   "Extraction of examples from Midje facts."
   (:use [peanut-butter-cup.util :only (form-to-str)])
-  (:require [midje.unprocessed :as unprocessed]))
+  (:require [midje.semi-sweet :as mss]))
 
 (defn- make-fact-extractor
   "Returns a function suitable for binding to *expect-checking-fn* that will
@@ -17,7 +17,7 @@ provided namespace. Each entry is a map containing the expectation
 map (:expect) and the fakes map (:fakes), if any."
   [ns]
   (let [facts (atom [])]
-    (binding [unprocessed/*expect-checking-fn* (make-fact-extractor facts)]
+    (binding [mss/*expect-checking-fn* (make-fact-extractor facts)]
       (require ns :reload))
     @facts))
 
