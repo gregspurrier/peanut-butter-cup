@@ -1,6 +1,7 @@
 (ns peanut-butter-cup.util
   "Misc. utility funtions"
-  (:require [clojure.string :as str]))
+  (:require [clojure.string :as str]
+            [clojure.pprint :as pp]))
 
 (defn- hyphen-to-underscore
   [s]
@@ -20,7 +21,8 @@
     (symbol (str/join "." (list* (first parts) "test" (rest parts))))))
 
 (defn form-to-str
+  "Given a form, returns a pretty-printed string represenation of it"
   [form]
   (let [writer (java.io.StringWriter.)]
-    (print-dup form writer)
-    (.toString writer)))
+    (pp/pprint form writer)
+    (str/trim-newline (.toString writer))))

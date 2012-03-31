@@ -16,4 +16,6 @@
   (form-to-str 9)
   => "9"
   (form-to-str '(a list))
-  => "(a list)")
+  => "(a list)"
+  (form-to-str ''(a quoted list))
+  => "'(a quoted list)")
