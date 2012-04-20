@@ -21,11 +21,6 @@ src directory."
   [ns]
   (ns-template/render-ns-html ns (core/get-fn-metadata-and-facts ns)))
 
-(defn html-file-name
-  "Returns the file name to be used for the docs for ns"
-  [ns]
-  (str *pbc-doc-root* "/" (str/replace (name ns) #"[-.]" "_") ".html"))
-
 (defn reset-pbc-doc-directory!
   "Recreates the pbc-doc directory and installs the static assets."
   []
