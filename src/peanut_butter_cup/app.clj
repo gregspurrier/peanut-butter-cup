@@ -8,20 +8,7 @@
 
 (def ^:dynamic *pbc-doc-root* "pbc-doc")
 
-(defn args-to-namespaces
-  "Returns the namespaces that correspond to the given command-line
-arguments. If args is empty, returns all namespaces found under the
-src directory."
-  [args]
-  (if (seq args)
-    (map symbol args)
-    (namespaces-in-dir "src")))
-
-(defn combined-ns-docs
-  [ns]
-  (ns-template/render-ns-html ns (core/get-fn-metadata-and-facts ns)))
-
-(defn reset-pbc-doc-directory!
+(defn- reset-pbc-doc-directory!
   "Recreates the pbc-doc directory and installs the static assets."
   []
   (let [root (io/file *pbc-doc-root*)]
@@ -30,10 +17,27 @@ src directory."
     (->> (slurp "resources/pbc-assets/styles.css")
          (spit (str *pbc-doc-root* "/styles.css")))))
 
+(defn- args-to-namespaces
+  "Returns the namespaces that correspond to the given command-line
+arguments. If args is empty, returns all namespaces found under the
+src directory."
+  [args]
+  (if (seq args)
+    (map symbol args)
+    (namespaces-in-dir "src")))
+
+(defn- ns-doc-html-path
+  [ns]
+  (str *pbc-doc-root* "/" (util/html-file-name ns)))
+
+(defn- combined-ns-docs
+  [ns]
+  (ns-template/render-ns-html ns (core/get-fn-metadata-and-facts ns)))
+
 (defn -main
   [& args]
   (reset-pbc-doc-directory!)
   (doseq [ns (args-to-namespaces args)]
     (require ns)
-    (spit (str *pbc-doc-root* "/" (util/html-file-name ns))
+    (spit (ns-doc-html-path ns)
           (combined-ns-docs ns))))
