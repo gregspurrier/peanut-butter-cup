@@ -1,0 +1,59 @@
+body {
+  font-family: Verdana, Geneva, sans-serif;
+  font-size: 1em;
+  max-width: 800px;
+}
+
+p {
+  line-height: 1.625;
+  margin-top: 1.625em;
+  margin-bottom: 1.625em;
+}
+
+#namespace {
+  font-family: Monaco, monospace;
+}
+
+.var h2 {
+  font-family: Monaco, monospace;
+}
+
+.usages {
+  margin: 1.625em 0 1.625em 0;
+}
+
+.usages ul, .examples ul {
+  list-style: none;
+  padding: 0;
+}
+
+.usages li, .examples ul {
+  font-family: Monaco, monospace;
+  margin: 0;
+}
+
+.usage {
+  line-height: 1;
+  margin: 0;
+}
+
+.examples ul {
+  margin: 1.625em 0 1.625em 0;
+  padding: 1.625em;
+  border: 1px solid #657b83;
+  color: #657b83;
+  background-color: #fdf6e3;
+}
+
+.example .subj, .example .pred {
+  line-height: 1;
+  margin: 0;
+}
+
+.example .pred {
+  font-style: italic;
+}
+
+.example + .example {
+  margin-top: 1em;
+}

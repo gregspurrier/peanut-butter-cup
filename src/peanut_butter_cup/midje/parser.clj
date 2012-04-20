@@ -18,7 +18,11 @@ map (:expect) and the fakes map (:fakes), if any."
   [ns]
   (let [facts (atom [])]
     (binding [mss/*expect-checking-fn* (make-fact-extractor facts)]
-      (require ns :reload))
+      (try
+        (require ns :reload)
+        (catch java.io.FileNotFoundException e
+          ;; No tests were found. Remain calm and carry on.
+          nil)))
     @facts))
 
 (defn- remove-undocumented-facts

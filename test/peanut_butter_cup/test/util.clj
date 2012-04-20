@@ -19,3 +19,7 @@
   => "(a list)"
   (form-to-str ''(a quoted list))
   => "'(a quoted list)")
+
+(fact "about html-file-name"
+  (html-file-name 'foo-bar.baz)
+  => "foo_bar_baz.html")
