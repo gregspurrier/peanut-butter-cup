@@ -3,5 +3,4 @@
   :dependencies [[org.clojure/clojure "1.3.0"]
                  [midje "1.3.2-SNAPSHOT"]
                  [enlive "1.0.0"]
-                 [org.markdownj/markdownj "0.3.0-1.0.2b4"]]
-  :main peanut-butter-cup.app)
+                 [org.markdownj/markdownj "0.3.0-1.0.2b4"]])
