@@ -19,7 +19,7 @@ src directory."
 
 (defn combined-ns-docs
   [ns]
-  (apply str (ns-template/template ns (core/get-fn-metadata-and-facts ns))))
+  (ns-template/render-ns-html ns (core/get-fn-metadata-and-facts ns)))
 
 (defn html-file-name
   "Returns the file name to be used for the docs for ns"

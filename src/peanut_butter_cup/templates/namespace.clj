@@ -60,3 +60,8 @@
   [:#namespace-doc] (if-let [d (namespace-doc ns)]
                       (html/html-content (format-doc-string d)))
   [:#publics] (html/content (map var-item fn-metas)))
+
+(defn render-ns-html
+  "Renders a namespace and its associated metadata as an HTML document string"
+  [ns fn-metas]
+  (apply str (template ns fn-metas)))
